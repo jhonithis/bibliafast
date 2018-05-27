@@ -1,0 +1,27 @@
+<div class="container-fluid">
+    
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="livro">Livro</label>
+                <select  class="form-control" id="livro">
+                    <option *ngFor="let livro of livros" value="{{livro}}">{{livro}}</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="capitulos">Capitulos</label>
+                <select  class="form-control" id="capitulos">
+                    <option *ngFor="let livro of livros" value="{{livro}}">{{livro}}</option>
+                </select>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="col-lg-12">
+        <div id="result"></div>
+    </div>
+</div>
