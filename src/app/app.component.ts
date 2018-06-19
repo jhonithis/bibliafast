@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import {Http, RequestMethod} from '@angular/http';
+import { Component, OnInit, Input } from '@angular/core';
+import { Http, RequestMethod } from '@angular/http';
 import { ConfigService } from './config/config.service';
+import { Biblia } from './biblia';
+import { LIVROS } from './mock-livro';
+import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -9,95 +12,37 @@ import { ConfigService } from './config/config.service';
 })
 export class AppComponent implements OnInit {
 
+  url: string;
   resultado: any;
+  biblia: Biblia;
+  listLivros = LIVROS;
 
-  constructor(private configService: ConfigService){}
+  constructor(private configService: ConfigService) { }
 
-  ngOnInit(){
-    this.listar();
-
+  ngOnInit() {
+    console.log(this.listLivros)
   }
 
-  listar(){
-    this.configService.getBibleBox().subscribe(
+  onSubmit(form : NgForm) {
+
+    this.biblia =  new Biblia(form.value.livro, form.value.capitulo);  
+
+    this.url = 
+        'https://data.biblebox.com/v18/bibles/nvi/' + 
+        this.biblia.livro + 
+        '/' + 
+        this.biblia.capitulo + 
+        '.xml';
+
+    this.configService.getBibleBox(this.url).subscribe(
       result => {
         this.resultado = result;
         this.resultado = this.resultado.replace(/chapter/g, "ol");
         this.resultado = this.resultado.replace(/verse/g, "li");
         document.getElementById("result").innerHTML = this.resultado;
-    }
+      }
     );
 
   }
-
-
-
-  livros = [
-    "Gênesis",
-    "Êxodo",
-    "Levítico",
-    "Números",
-    "Deuteronômio",
-    "Josué",
-    "Juízes",
-    "Rute",
-    "1 Samuel",
-    "2 Samuel",
-    "1 Reis",
-    "2 Reis",
-    "1 Crônicas",
-    "2 Crônicas",
-    "Esdras",
-    "Neemias",
-    "Ester",
-    "Jó",
-    "Salmos",
-    "Provérbios",
-    "Eclesiastes",
-    "Cantares",
-    "Isaías",
-    "Jeremias",
-    "Lamentações",
-    "Ezequiel",
-    "Daniel",
-    "Oseias",
-    "Joel",
-    "Amós",
-    "Obadias",
-    "Jonas",
-    "Miqueias",
-    "Naum",
-    "Habacuque",
-    "Sofonias",
-    "Ageu",
-    "Zacarias",
-    "Malaquias",
-    "Mateus",
-    "Marcos",
-    "Lucas",
-    "João",
-    "Atos dos Apóstolos",
-    "Romanos",
-    "1 Coríntios",
-    "2 Coríntios",
-    "Gálatas",
-    "Efésios",
-    "Filipenses",
-    "Colossenses",
-    "1 Tessalonicenses",
-    "2 Tessalonicenses",
-    "1 Timóteo",
-    "2 Timóteo",
-    "Tito",
-    "Filemom",
-    "Hebreus",
-    "Tiago",
-    "1 Pedro",
-    "2 Pedro",
-    "1 João",
-    "2 João",
-    "3 João",
-    "Judas",
-    "Apocalipse"]
 
 }

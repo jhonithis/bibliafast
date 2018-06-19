@@ -7,3 +7,11 @@ ol{
     margin-right: 0;
     padding-left: 40px;
 }
+
+li{margin-bottom: 0.5em;}
+
+#result, strong{
+   font-size: 5em;
+   font-family: Lora, serif;
+   line-height: 1.1;
+}

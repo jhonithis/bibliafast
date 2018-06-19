@@ -1,27 +1,54 @@
-<div class="container-fluid">
-    
+<div class="container">
+
     <div class="row">
-        <div class="col-lg-6">
-            <div class="form-group">
-                <label for="livro">Livro</label>
-                <select  class="form-control" id="livro">
-                    <option *ngFor="let livro of livros" value="{{livro}}">{{livro}}</option>
-                </select>
-            </div>
-        </div>
+        <div class="col-lg-12">
+            <form 
+                #f="ngForm" 
+                (ngSubmit)="onSubmit(f)" 
+                class="form-inline">
 
-        <div class="col-lg-6">
-            <div class="form-group">
-                <label for="capitulos">Capitulos</label>
-                <select  class="form-control" id="capitulos">
-                    <option *ngFor="let livro of livros" value="{{livro}}">{{livro}}</option>
-                </select>
-            </div>
-        </div>
+                    <div class="form-group">
+                        <label for="livro">Livro</label>
+                        <select  class="form-control" id="livro" name="livro" ngModel>
+                            <option 
+                                class="form-control"
+                                *ngFor="let livro of listLivros" 
+                                value="{{livro.sigla}}">
+                                    {{livro.nome}}
+                            </option>
+                        </select>
+                    </div>
 
+                    <div class="form-group">
+                        <label for="capitulo">Capitulo</label>
+                        <input 
+                            id="capitulo"
+                            class="form-control"
+                            type="number"
+                            placeholder="Digite o numero do capitulo" 
+                            min="0"
+                            ngModel
+                            name="capitulo" >
+                    </div>
+
+                    <button
+                        type="submit"
+                        class="btn btn-primary">
+                            Buscar
+                    </button>
+
+            </form>
+        </div>
     </div>
 
-    <div class="col-lg-12">
-        <div id="result"></div>
+    <hr/>
+
+    <strong *ngIf="biblia != null">{{biblia.livro}} &nbsp; {{biblia.capitulo}}</strong>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div id="result" class="text-left"></div>
+        </div>
     </div>
+
 </div>
