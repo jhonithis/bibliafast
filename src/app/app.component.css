@@ -1,3 +1,5 @@
+li{margin-bottom: 3em !important;}
+
 ol{
     display: block;
     list-style-type: decimal;
@@ -7,8 +9,6 @@ ol{
     margin-right: 0;
     padding-left: 40px;
 }
-
-li{margin-bottom: 0.5em;}
 
 #result, strong{
    font-size: 5em;
