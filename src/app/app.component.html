@@ -1,5 +1,5 @@
-<nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container">
+<nav class="navbar navbar-default navbar-fixed-top" role="search">
+    <div class="container-fluid">
 
         <form 
             #f="ngForm" 
@@ -7,12 +7,18 @@
         
             <div class="row">
 
-                <div class="col-lg-6 col-md-6 col-xs-6 col-sm-6" >
+                <div class="col-lg-3 col-md-3 col-xs-3 col-sm-3" >
                     <div class="form-group">
                         <label for="livro">Livro</label>
-                        <select class="form-control" id="livro" name="livro" ngModel>
-                            <option value="" disabled>Selecione um Livro</option>
-                            <option 
+                        <select 
+                            class="form-control" 
+                            id="livro"
+                            name="livro" 
+                            #livro
+                            ngModel>
+                            <option value="" label="" disabled>Selecione um Livro</option>
+                            <option
+                                label="{{livro.nome}}" 
                                 class="form-control"
                                 *ngFor="let livro of listLivros" 
                                 value="{{livro.sigla}}">
@@ -22,21 +28,22 @@
                     </div>
                 </div>
 
-                <div class="col-lg-4 col-md-4 col-xs-4 col-sm-4">
+                <div class="col-lg-2 col-md-2 col-xs-2 col-sm-2">
                     <div class="form-group">
                         <label for="capitulo">Capitulo</label>
                         <input 
                             id="capitulo"
                             class="form-control"
                             type="number"
-                            placeholder="Digite o numero do capitulo" 
-                            min="0"
+                            placeholder="Número do capítulo" 
+                            min="1"
                             ngModel
+                            #capitulo
                             name="capitulo" >
                     </div>
                 </div>
 
-                <div class="col-lg-2 col-md-2 col-xs-2 col-sm-2">
+                <div class="col-lg-1 col-md-1 col-xs-1 col-sm-1">
                     <div class="form-group">
                         <label>&nbsp;</label>
                         <button
@@ -44,6 +51,12 @@
                             class="btn btn-primary form-control">
                                 Buscar
                         </button>
+                    </div>
+                </div>
+
+                <div class="col-lg-5 col-md-5 col-xs-5 col-sm-5" *ngIf="biblia != null && biblia.livro != null && biblia.capitulo != null">
+                    <div class="form-group">
+                        <label id="livro-capitulo">{{listLivros[livro.selectedIndex - 1].nome}} {{capitulo.value}}</label>
                     </div>
                 </div>
 
@@ -55,23 +68,17 @@
 </nav>
     
 
-<div class="container" >
+<div class="container" *ngIf="biblia != null">
 
-    <div class="row" >
-        <div  class="col-lg-12 text-center">
-            <strong *ngIf="biblia != null">{{biblia.livro}} &nbsp; {{biblia.capitulo}}</strong>
-        </div>
-    </div>
-
-    <div class="row" >
+    <div class="row">
         <div class="col-lg-12">
             <div id="result" class="text-left"></div>
         </div>
     </div>
+
 </div>
 
 <!-- 
     espacamento li
-    titulo bilia
-    espacamento campo busca -->
+ -->
 

@@ -10,8 +10,24 @@ ol{
     padding-left: 40px;
 }
 
-#result, strong{
+#result{
    font-size: 5em;
    font-family: Lora, serif;
    line-height: 1.1;
+}
+
+.container {
+    margin-top: 100px;
+}
+  
+nav {
+    height: 100px;
+}
+nav .container {
+    margin-top: 0;
+}
+
+#livro-capitulo{
+    font-size: 4em;
+    font-family: Lora, serif;
 }

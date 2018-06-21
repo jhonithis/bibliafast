@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, InjectionToken } from '@angular/core';
 import { Http, RequestMethod } from '@angular/http';
 import { ConfigService } from './config/config.service';
 import { Biblia } from './biblia';
@@ -20,7 +20,6 @@ export class AppComponent implements OnInit {
   constructor(private configService: ConfigService) { }
 
   ngOnInit() {
-    console.log(this.listLivros)
   }
 
   onSubmit(form : NgForm) {
