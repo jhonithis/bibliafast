@@ -1,0 +1,84 @@
+<nav class="navbar navbar-default navbar-fixed-top" role="search">
+    <div class="container-fluid">
+
+        <form 
+            #f="ngForm" 
+            (ngSubmit)="onSubmit(f)" >
+        
+            <div class="row">
+
+                <div class="col-lg-3 col-md-3 col-xs-3 col-sm-3" >
+                    <div class="form-group">
+                        <label for="livro">Livro</label>
+                        <select 
+                            class="form-control" 
+                            id="livro"
+                            name="livro"
+                            #livro
+                            ngModel>
+                            <option value="" label="" disabled>Selecione um Livro</option>
+                            <option
+                                label="{{livro.nome}}" 
+                                class="form-control"
+                                *ngFor="let livro of listLivros" 
+                                value="{{livro.sigla}}">
+                                    {{livro.nome}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-lg-2 col-md-2 col-xs-2 col-sm-2">
+                    <div class="form-group">
+                        <label for="capitulo">Capitulo</label>
+                        <input
+                            id="capitulo"
+                            class="form-control"
+                            type="number"
+                            placeholder="Número do capítulo" 
+                            min="1"
+                            ngModel
+                            #capitulo
+                            name="capitulo" >
+                    </div>
+                </div>
+
+                <div class="col-lg-1 col-md-1 col-xs-1 col-sm-1">
+                    <div class="form-group">
+                        <label>&nbsp;</label>
+                        <button
+                            type="submit"
+                            class="btn btn-primary form-control">
+                               <span class="glyphicon glyphicon-search"></span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="col-lg-5 col-md-5 col-xs-5 col-sm-5" *ngIf="biblia != null && biblia.livro != null && biblia.capitulo != null">
+                    <div class="form-group">
+                        <label id="livro-capitulo">{{listLivros[livro.selectedIndex - 1].nome}} {{capitulo.value}}</label>
+                    </div>
+                </div>
+
+            </div>
+
+        </form>
+
+    </div>
+</nav>
+    
+
+<div class="container" *ngIf="biblia != null">
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div id="result"></div>
+        </div>
+    </div>
+
+</div>
+
+<!-- 
+    espacamento li
+ -->
+
